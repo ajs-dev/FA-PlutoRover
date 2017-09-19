@@ -4,5 +4,7 @@ namespace FA.PlutoRover.Api
     {
         public const string Forwards = "F";
         public const string Backwards = "B";
+        public const string TurnRight = "R";
+        public const string TurnLeft = "L";
     }
 }

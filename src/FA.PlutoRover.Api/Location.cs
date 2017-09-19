@@ -12,5 +12,7 @@ namespace FA.PlutoRover.Api
             Y = y;
             Orientation = orientation;
         }
+
+
     }
 }
