@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FA.PlutoRover.Api", "src\FA.PlutoRover.Api\FA.PlutoRover.Api.csproj", "{6FA87103-95FB-4818-BCBE-81ADC2DD27CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{43682583-FDD7-429A-A0ED-18F47CD1BFCE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F71055D0-7030-4F2E-9F6C-F7BF7D25B2AD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FA.PlutoRover.Api.Tests", "test\FA.PlutoRover.Api.Tests\FA.PlutoRover.Api.Tests.csproj", "{630B7C75-C10B-49AF-8D9C-C8D15079666D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6FA87103-95FB-4818-BCBE-81ADC2DD27CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FA87103-95FB-4818-BCBE-81ADC2DD27CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FA87103-95FB-4818-BCBE-81ADC2DD27CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FA87103-95FB-4818-BCBE-81ADC2DD27CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{630B7C75-C10B-49AF-8D9C-C8D15079666D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{630B7C75-C10B-49AF-8D9C-C8D15079666D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{630B7C75-C10B-49AF-8D9C-C8D15079666D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{630B7C75-C10B-49AF-8D9C-C8D15079666D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6FA87103-95FB-4818-BCBE-81ADC2DD27CF} = {43682583-FDD7-429A-A0ED-18F47CD1BFCE}
+		{630B7C75-C10B-49AF-8D9C-C8D15079666D} = {F71055D0-7030-4F2E-9F6C-F7BF7D25B2AD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E59B4E96-3AF1-4A94-8760-F3917239A9FF}
+	EndGlobalSection
+EndGlobal
