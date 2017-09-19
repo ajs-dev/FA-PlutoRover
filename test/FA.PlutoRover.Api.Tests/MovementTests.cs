@@ -1,5 +1,4 @@
 using System.Drawing;
-using System.Reflection.PortableExecutable;
 using NUnit.Framework;
 
 namespace FA.PlutoRover.Api.Tests
@@ -13,11 +12,11 @@ namespace FA.PlutoRover.Api.Tests
             //Arrange
             var start = new Point();
             var grid = new Point(10, 10);
-            var orientation = Orientation.North;
+            var orientation = OrientationEnum.North;
             IMovement rover = new PlutoRover(grid, start, orientation);
 
             const string moveCommand = Movement.Forwards;
-            const ILocation expectedLocation = new Location(start.X, start.Y+1, Orientation.North);
+            ILocation expectedLocation = new Location(start.X, start.Y+1, OrientationEnum.North);
 
             //Act
             ILocation newLocation = rover.Move(moveCommand);
@@ -35,11 +34,11 @@ namespace FA.PlutoRover.Api.Tests
             //Arrange
             var start = new Point();
             var grid = new Point(10, 10);
-            var orientation = Orientation.North;
+            var orientation = OrientationEnum.North;
             IMovement rover = new PlutoRover(grid, start, orientation);
 
             const string moveCommand = Movement.Backwards;
-            const ILocation expectedLocation = new Location(start.X, start.Y - 1, Orientation.North);
+            ILocation expectedLocation = new Location(start.X, start.Y - 1, OrientationEnum.North);
 
             //Act
             ILocation newLocation = rover.Move(moveCommand);

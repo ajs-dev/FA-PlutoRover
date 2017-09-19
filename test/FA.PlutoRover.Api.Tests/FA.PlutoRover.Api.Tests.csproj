@@ -12,4 +12,8 @@
     <PackageReference Include="NUnit.Console" Version="3.7.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\FA.PlutoRover.Api\FA.PlutoRover.Api.csproj" />
+  </ItemGroup>
+
 </Project>
