@@ -32,22 +32,27 @@ namespace FA.PlutoRover.Api
             if (string.IsNullOrWhiteSpace(journey))
                 throw new ArgumentNullException(nameof(journey), "Please specified a journey for the rover");
 
+            Point loc;
+            OrientationEnum or;
             ILocation newLocation;
             //simple single journey "step"
             switch (journey)
             {
                 case Movement.Forwards:
-                    var loc = GetLocationMovingForward(CurrentLocation);
+                    loc = GetLocationMovingForward(CurrentLocation);
                     newLocation = new Location(loc, CurrentLocation.Orientation);
                     break;
                 case Movement.Backwards:
-                    newLocation = new Location(CurrentLocation.X, CurrentLocation.Y - 1, CurrentLocation.Orientation);
+                    loc = GetLocationMovingBackward(CurrentLocation);
+                    newLocation = new Location(loc, CurrentLocation.Orientation);
                     break;
                 case Movement.TurnRight:
-                    newLocation = new Location(CurrentLocation.X, CurrentLocation.Y, ChangeOrientationRight(CurrentLocation.Orientation));
+                    or = ChangeOrientationRight(CurrentLocation.Orientation);
+                    newLocation = new Location(CurrentLocation.X, CurrentLocation.Y, or);
                     break;
                 case Movement.TurnLeft:
-                    newLocation = new Location(CurrentLocation.X, CurrentLocation.Y, ChangeOrientationLeft(CurrentLocation.Orientation));
+                    or = ChangeOrientationLeft(CurrentLocation.Orientation);
+                    newLocation = new Location(CurrentLocation.X, CurrentLocation.Y, or);
                     break;
                 default:
                     throw new InvalidOperationException($"The specified journey \"{journey}\" for the rover is invalid");
@@ -56,6 +61,11 @@ namespace FA.PlutoRover.Api
             return newLocation;
         }
 
+        /// <summary>
+        /// Marked public so that tests can be written
+        /// </summary>
+        /// <param name="currentLoc"></param>
+        /// <returns></returns>
         public Point GetLocationMovingForward(ILocation currentLoc)
         {
             Point loc = new Point();
@@ -83,7 +93,44 @@ namespace FA.PlutoRover.Api
             return loc;
         }
 
-        private OrientationEnum ChangeOrientationRight(OrientationEnum orientation)
+        /// <summary>
+        /// Marked public so tests can be written
+        /// </summary>
+        /// <param name="currentLoc"></param>
+        /// <returns></returns>
+        public Point GetLocationMovingBackward(ILocation currentLoc)
+        {
+            Point loc = new Point();
+            if (currentLoc.Orientation == OrientationEnum.North)
+            {
+                loc.X = currentLoc.X;
+                loc.Y = currentLoc.Y <= ROOT_Y ? Grid.Y : currentLoc.Y - 1; //wrap around grid
+            }
+            else if (currentLoc.Orientation == OrientationEnum.East)
+            {
+                loc.X = currentLoc.X <= ROOT_X ? Grid.X : currentLoc.X - 1; //wrap around grid
+                loc.Y = currentLoc.Y;
+            }
+            else if (currentLoc.Orientation == OrientationEnum.South)
+            {
+                loc.X = currentLoc.X;
+                loc.Y = currentLoc.Y >= Grid.Y ? ROOT_Y : currentLoc.Y + 1; //wrap around grid
+            }
+            else if (currentLoc.Orientation == OrientationEnum.West)
+            {
+                loc.X = currentLoc.X >= Grid.X ? ROOT_X : currentLoc.X + 1; //wrap around grid
+                loc.Y = currentLoc.Y;
+            }
+
+            return loc;
+        }
+
+        /// <summary>
+        /// Marked public so tests can be written
+        /// </summary>
+        /// <param name="orientation"></param>
+        /// <returns></returns>
+        public OrientationEnum ChangeOrientationRight(OrientationEnum orientation)
         {
             OrientationEnum newOr;
             switch (orientation)
@@ -107,7 +154,12 @@ namespace FA.PlutoRover.Api
             return newOr;
         }
 
-        private OrientationEnum ChangeOrientationLeft(OrientationEnum orientation)
+        /// <summary>
+        /// Marked public so tests can be written
+        /// </summary>
+        /// <param name="orientation"></param>
+        /// <returns></returns>
+        public OrientationEnum ChangeOrientationLeft(OrientationEnum orientation)
         {
             OrientationEnum newOr;
             switch (orientation)
