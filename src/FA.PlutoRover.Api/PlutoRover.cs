@@ -55,6 +55,7 @@ namespace FA.PlutoRover.Api
                     newLocation = new Location(CurrentLocation.X, CurrentLocation.Y, or);
                     break;
                 default:
+                    //maybe should just swallow it
                     throw new InvalidOperationException($"The specified journey \"{journey}\" for the rover is invalid");
             }
 
@@ -62,7 +63,7 @@ namespace FA.PlutoRover.Api
         }
 
         /// <summary>
-        /// Marked public so that tests can be written
+        /// Marked public so that more simplified tests can be written
         /// </summary>
         /// <param name="currentLoc"></param>
         /// <returns></returns>
@@ -94,7 +95,7 @@ namespace FA.PlutoRover.Api
         }
 
         /// <summary>
-        /// Marked public so tests can be written
+        /// Marked public so that more simplified tests can be written
         /// </summary>
         /// <param name="currentLoc"></param>
         /// <returns></returns>
@@ -126,7 +127,7 @@ namespace FA.PlutoRover.Api
         }
 
         /// <summary>
-        /// Marked public so tests can be written
+        /// Marked public so that more simplified tests can be written
         /// </summary>
         /// <param name="orientation"></param>
         /// <returns></returns>
@@ -155,7 +156,7 @@ namespace FA.PlutoRover.Api
         }
 
         /// <summary>
-        /// Marked public so tests can be written
+        /// Marked public so that more simplified tests can be written
         /// </summary>
         /// <param name="orientation"></param>
         /// <returns></returns>
