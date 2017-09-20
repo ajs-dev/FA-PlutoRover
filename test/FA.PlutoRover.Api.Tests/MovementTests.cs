@@ -71,5 +71,27 @@ namespace FA.PlutoRover.Api.Tests
             Assert.That(newLocation.Y, Is.EqualTo(expectedLocation.Y));
             Assert.That(newLocation.Orientation, Is.EqualTo(expectedLocation.Orientation));
         }
+
+        [Test]
+        public void MoveBackward_StartAtGridBoundary_OrientatedNorth_WrapAround()
+        {
+            //Arrange
+            var grid = new Point(10, 10);
+            var start = new Point(PlutoRover.ROOT_X, PlutoRover.ROOT_Y);
+            var orientation = OrientationEnum.North;
+            IMovement rover = new PlutoRover(grid, start, orientation);
+
+            const string moveCommand = Movement.Backwards;
+            ILocation expectedLocation = new Location(start.X, grid.Y, OrientationEnum.North);
+
+            //Act
+            ILocation newLocation = rover.Move(moveCommand);
+
+            //Assert
+            Assert.That(newLocation, Is.Not.Null);
+            Assert.That(newLocation.X, Is.EqualTo(expectedLocation.X));
+            Assert.That(newLocation.Y, Is.EqualTo(expectedLocation.Y));
+            Assert.That(newLocation.Orientation, Is.EqualTo(expectedLocation.Orientation));
+        }
     }
 }
