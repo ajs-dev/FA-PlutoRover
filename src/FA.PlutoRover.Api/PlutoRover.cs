@@ -5,6 +5,9 @@ namespace FA.PlutoRover.Api
 {
     public class PlutoRover : IRover
     {
+        public const int ROOT_Y = 0;
+        public const int ROOT_X = 0;
+
         private readonly Point _grid;
         private readonly Point _start;
 
@@ -34,7 +37,8 @@ namespace FA.PlutoRover.Api
             switch (journey)
             {
                 case Movement.Forwards:
-                    newLocation = new Location(CurrentLocation.X, CurrentLocation.Y + 1, CurrentLocation.Orientation);
+                    var loc = GetLocationMovingForward(CurrentLocation);
+                    newLocation = new Location(loc, CurrentLocation.Orientation);
                     break;
                 case Movement.Backwards:
                     newLocation = new Location(CurrentLocation.X, CurrentLocation.Y - 1, CurrentLocation.Orientation);
@@ -50,6 +54,33 @@ namespace FA.PlutoRover.Api
             }
 
             return newLocation;
+        }
+
+        public Point GetLocationMovingForward(ILocation currentLoc)
+        {
+            Point loc = new Point();
+            if (currentLoc.Orientation == OrientationEnum.North)
+            {
+                loc.X = currentLoc.X;
+                loc.Y = currentLoc.Y >= Grid.Y ? ROOT_Y : currentLoc.Y + 1; //wrap around grid
+            }
+            else if (currentLoc.Orientation == OrientationEnum.East)
+            {
+                loc.X = currentLoc.X >= Grid.X ? ROOT_X : currentLoc.X + 1; //wrap around grid
+                loc.Y = currentLoc.Y;
+            }
+            else if (currentLoc.Orientation == OrientationEnum.South)
+            {
+                loc.X = currentLoc.X;
+                loc.Y = currentLoc.Y <= ROOT_Y ? Grid.Y : currentLoc.Y - 1; //wrap around grid
+            }
+            else if (currentLoc.Orientation == OrientationEnum.West)
+            {
+                loc.X = currentLoc.X <= ROOT_X ? Grid.X : currentLoc.X - 1; //wrap around grid
+                loc.Y = currentLoc.Y;
+            }
+
+            return loc;
         }
 
         private OrientationEnum ChangeOrientationRight(OrientationEnum orientation)

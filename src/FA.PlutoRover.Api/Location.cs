@@ -1,3 +1,5 @@
+using System.Drawing;
+
 namespace FA.PlutoRover.Api
 {
     public class Location : ILocation
@@ -10,6 +12,12 @@ namespace FA.PlutoRover.Api
         {
             X = x;
             Y = y;
+            Orientation = orientation;
+        }
+        public Location(Point loc, OrientationEnum orientation)
+        {
+            X = loc.X;
+            Y = loc.Y;
             Orientation = orientation;
         }
 
