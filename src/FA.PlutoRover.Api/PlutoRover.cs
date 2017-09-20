@@ -40,7 +40,6 @@ namespace FA.PlutoRover.Api
                     newLocation = new Location(CurrentLocation.X, CurrentLocation.Y - 1, CurrentLocation.Orientation);
                     break;
                 case Movement.TurnRight:
-                    var newOrientation = ChangeOrientationRight(CurrentLocation.Orientation);
                     newLocation = new Location(CurrentLocation.X, CurrentLocation.Y, ChangeOrientationRight(CurrentLocation.Orientation));
                     break;
                 case Movement.TurnLeft:
