@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace FA.PlutoRover.Api.Tests
 {
     [TestFixture]
-    public class OrientationTests
+    public class BasicOrientationTests
     {
         [Test]
         public void TurnLeft_OrientatedNorth()

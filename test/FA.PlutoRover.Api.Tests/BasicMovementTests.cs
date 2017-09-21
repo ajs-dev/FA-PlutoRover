@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace FA.PlutoRover.Api.Tests
 {
     [TestFixture]
-    public class MovementTests
+    public class BasicMovementTests
     {
         [Test]
         public void MoveForward_StartAtZeroZero_OrientatedNorth()
