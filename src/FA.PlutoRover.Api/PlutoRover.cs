@@ -14,15 +14,12 @@ namespace FA.PlutoRover.Api
         public Point Grid => _grid;
         public Point Start => _start;
 
-        public OrientationEnum Orientation { get; }
-        public ILocation CurrentLocation { get; }
+        public ILocation CurrentLocation { get; private set; }
 
         public PlutoRover(Point grid, Point start, OrientationEnum orientation)
         {
             _start = start;
             _grid = grid;
-
-            Orientation = orientation;
 
             CurrentLocation = new Location(start.X, start.Y, orientation);
         }
@@ -32,6 +29,21 @@ namespace FA.PlutoRover.Api
             if (string.IsNullOrWhiteSpace(journey))
                 throw new ArgumentNullException(nameof(journey), "Please specified a journey for the rover");
 
+            foreach (char step in journey)
+            {
+                CurrentLocation = MoveOne(step.ToString());
+            }
+            
+            return CurrentLocation;
+        }
+
+        /// <summary>
+        /// Marked public so that more simplified tests can be written
+        /// </summary>
+        /// <param name="journey"></param>
+        /// <returns></returns>
+        public ILocation MoveOne(string journey)
+        {
             Point loc;
             OrientationEnum or;
             ILocation newLocation;
@@ -58,7 +70,6 @@ namespace FA.PlutoRover.Api
                     //maybe should just swallow it
                     throw new InvalidOperationException($"The specified journey \"{journey}\" for the rover is invalid");
             }
-
             return newLocation;
         }
 
