@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Drawing;
 using NUnit.Framework;
 
@@ -12,8 +13,9 @@ namespace FA.PlutoRover.Api.Tests
             //Arrange
             var start = new Point();
             var grid = new Point(10, 10);
+            var terrain = new PlanetaryTerrain(grid, new ImmutableArray<Point>());
             var orientation = OrientationEnum.North;
-            IMovement rover = new PlutoRover(grid, start, orientation);
+            IMovement rover = new PlutoRover(terrain, start, orientation);
 
             const string moveCommand = Movement.TurnLeft;
             ILocation expectedLocation = new Location(start.X, start.Y, OrientationEnum.West);
@@ -34,8 +36,9 @@ namespace FA.PlutoRover.Api.Tests
             //Arrange
             var start = new Point();
             var grid = new Point(10, 10);
+            var terrain = new PlanetaryTerrain(grid, new ImmutableArray<Point>());
             var orientation = OrientationEnum.North;
-            IMovement rover = new PlutoRover(grid, start, orientation);
+            IMovement rover = new PlutoRover(terrain, start, orientation);
 
             const string moveCommand = Movement.TurnRight;
             ILocation expectedLocation = new Location(start.X, start.Y, OrientationEnum.East);

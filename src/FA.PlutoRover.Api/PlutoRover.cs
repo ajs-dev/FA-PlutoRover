@@ -8,18 +8,15 @@ namespace FA.PlutoRover.Api
         public const int ROOT_Y = 0;
         public const int ROOT_X = 0;
 
-        private readonly Point _grid;
-        private readonly Point _start;
-
-        public Point Grid => _grid;
-        public Point Start => _start;
+        public ITerrain Terrain { get; }
+        public Point Start { get; }
 
         public ILocation CurrentLocation { get; private set; }
 
-        public PlutoRover(Point grid, Point start, OrientationEnum orientation)
+        public PlutoRover(ITerrain terrain, Point start, OrientationEnum orientation)
         {
-            _start = start;
-            _grid = grid;
+            Start = start;
+            Terrain = terrain;
 
             CurrentLocation = new Location(start.X, start.Y, orientation);
         }
@@ -84,21 +81,21 @@ namespace FA.PlutoRover.Api
             if (currentLoc.Orientation == OrientationEnum.North)
             {
                 loc.X = currentLoc.X;
-                loc.Y = currentLoc.Y >= Grid.Y ? ROOT_Y : currentLoc.Y + 1; //wrap around grid
+                loc.Y = currentLoc.Y >= Terrain.Grid.Y ? ROOT_Y : currentLoc.Y + 1; //wrap around grid
             }
             else if (currentLoc.Orientation == OrientationEnum.East)
             {
-                loc.X = currentLoc.X >= Grid.X ? ROOT_X : currentLoc.X + 1; //wrap around grid
+                loc.X = currentLoc.X >= Terrain.Grid.X ? ROOT_X : currentLoc.X + 1; //wrap around grid
                 loc.Y = currentLoc.Y;
             }
             else if (currentLoc.Orientation == OrientationEnum.South)
             {
                 loc.X = currentLoc.X;
-                loc.Y = currentLoc.Y <= ROOT_Y ? Grid.Y : currentLoc.Y - 1; //wrap around grid
+                loc.Y = currentLoc.Y <= ROOT_Y ? Terrain.Grid.Y : currentLoc.Y - 1; //wrap around grid
             }
             else if (currentLoc.Orientation == OrientationEnum.West)
             {
-                loc.X = currentLoc.X <= ROOT_X ? Grid.X : currentLoc.X - 1; //wrap around grid
+                loc.X = currentLoc.X <= ROOT_X ? Terrain.Grid.X : currentLoc.X - 1; //wrap around grid
                 loc.Y = currentLoc.Y;
             }
 
@@ -116,21 +113,21 @@ namespace FA.PlutoRover.Api
             if (currentLoc.Orientation == OrientationEnum.North)
             {
                 loc.X = currentLoc.X;
-                loc.Y = currentLoc.Y <= ROOT_Y ? Grid.Y : currentLoc.Y - 1; //wrap around grid
+                loc.Y = currentLoc.Y <= ROOT_Y ? Terrain.Grid.Y : currentLoc.Y - 1; //wrap around grid
             }
             else if (currentLoc.Orientation == OrientationEnum.East)
             {
-                loc.X = currentLoc.X <= ROOT_X ? Grid.X : currentLoc.X - 1; //wrap around grid
+                loc.X = currentLoc.X <= ROOT_X ? Terrain.Grid.X : currentLoc.X - 1; //wrap around grid
                 loc.Y = currentLoc.Y;
             }
             else if (currentLoc.Orientation == OrientationEnum.South)
             {
                 loc.X = currentLoc.X;
-                loc.Y = currentLoc.Y >= Grid.Y ? ROOT_Y : currentLoc.Y + 1; //wrap around grid
+                loc.Y = currentLoc.Y >= Terrain.Grid.Y ? ROOT_Y : currentLoc.Y + 1; //wrap around grid
             }
             else if (currentLoc.Orientation == OrientationEnum.West)
             {
-                loc.X = currentLoc.X >= Grid.X ? ROOT_X : currentLoc.X + 1; //wrap around grid
+                loc.X = currentLoc.X >= Terrain.Grid.X ? ROOT_X : currentLoc.X + 1; //wrap around grid
                 loc.Y = currentLoc.Y;
             }
 
