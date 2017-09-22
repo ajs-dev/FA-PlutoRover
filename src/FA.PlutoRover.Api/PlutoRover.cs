@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 
 namespace FA.PlutoRover.Api
 {
@@ -26,12 +27,25 @@ namespace FA.PlutoRover.Api
             if (string.IsNullOrWhiteSpace(journey))
                 throw new ArgumentNullException(nameof(journey), "Please specified a journey for the rover");
 
+            ILocation newLocation = null;
             foreach (char step in journey)
             {
-                CurrentLocation = MoveOne(step.ToString());
+                newLocation = MoveOne(step.ToString());
+                if (Terrain.Obstacles.Contains(new Point(newLocation.X, newLocation.Y)))
+                {
+                    //report obstacle encountered
+                    newLocation =
+                        new LocationBlocked("An obstacle is blocking your path. Go north, open door with key, or go back.",
+                                            CurrentLocation.X, CurrentLocation.Y, CurrentLocation.Orientation);
+                    break;
+                }
+                else
+                {
+                    CurrentLocation = newLocation;
+                }
             }
             
-            return CurrentLocation;
+            return newLocation;
         }
 
         /// <summary>
@@ -44,7 +58,6 @@ namespace FA.PlutoRover.Api
             Point loc;
             OrientationEnum or;
             ILocation newLocation;
-            //simple single journey "step"
             switch (journey)
             {
                 case Movement.Forwards:
